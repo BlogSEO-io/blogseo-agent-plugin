@@ -1,0 +1,8 @@
+{
+    "mcpServers": {
+        "blogseo": {
+            "type": "http",
+            "url": "https://mcp.blogseo.io/mcp"
+        }
+    }
+}

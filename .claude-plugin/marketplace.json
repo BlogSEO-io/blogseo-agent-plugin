@@ -1,0 +1,14 @@
+{
+    "name": "blogseo",
+    "owner": { "name": "BlogSEO", "email": "support@blogseo.io" },
+    "metadata": { "description": "The BlogSEO plugin for Claude Code.", "version": "1.0.0" },
+    "plugins": [
+        {
+            "name": "blogseo",
+            "source": "./",
+            "description": "SEO that executes: keywords, calendar, articles, scores, publishing and backlinks through the BlogSEO MCP server.",
+            "version": "1.0.0",
+            "category": "marketing"
+        }
+    ]
+}
