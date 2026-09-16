@@ -6,7 +6,7 @@ Sign-in is OAuth: the first tool call opens the BlogSEO consent page, where you 
 
 ## Install
 
-**Cursor.** Open Customize in the sidebar, find BlogSEO in the marketplace, Install. For local testing, clone this repo into `~/.cursor/plugins/local`.
+**Cursor.** Install from the [Cursor Directory](https://cursor.directory/plugins/blogseo), or open Customize in the sidebar, find BlogSEO in the marketplace and click Install. One-click server install without the plugin: [Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=blogseo&config=eyJ1cmwiOiJodHRwczovL21jcC5ibG9nc2VvLmlvL21jcCJ9). For local testing, clone this repo into `~/.cursor/plugins/local`.
 
 **Claude Code.**
 
