@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Builds the ZIP for the OpenAI plugin portal ("Upload new version").
-# The portal identifies a plugin by the package name it assigned (app-...) and rejects any other manifest name,
-# so the name is swapped in the packaged copy only. Every upload rebuilds the listing from
-# extensions.com.openai.interface in plugin.json. mcp.json stays out by default: while the plugin's MCP app is
-# unpublished the portal refuses a package that declares the server again ("Keep the existing MCP connection").
-# Set WITH_MCP=1 to include it.
+# The package mirrors the release ZIP the portal generated for 1.0.0: a .codex-plugin/plugin.json manifest whose
+# name is the package name the portal assigned (app-...), the listing under "interface", and the skills. Every
+# upload rebuilds the listing from that manifest, so the listing fields live in extensions.com.openai.interface
+# of the root plugin.json and are copied over here. The original package declared no MCP server (the portal holds
+# that connection itself) and the portal refused a package that declared one while the MCP app was unpublished.
+# WITH_MCP=1 declares it anyway, under MCP_SERVER_NAME.
 set -euo pipefail
 
 PACKAGE_NAME="${1:?usage: scripts/package-openai.sh <openai-package-name> [output.zip]}"
@@ -14,18 +15,17 @@ OUTPUT="${2:-$ROOT/dist/blogseo-openai-$VERSION.zip}"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
-cp -R "$ROOT/skills" "$ROOT/assets" "$ROOT/LICENSE" "$STAGE/"
-if [ "${WITH_MCP:-0}" = "1" ]; then cp "$ROOT/mcp.json" "$STAGE/"; fi
-python3 - "$ROOT/plugin.json" "$STAGE/plugin.json" "$PACKAGE_NAME" "$STAGE" <<'PY'
+mkdir -p "$STAGE/.codex-plugin"
+cp -R "$ROOT/skills" "$ROOT/assets" "$STAGE/"
+python3 - "$ROOT/plugin.json" "$STAGE" "$PACKAGE_NAME" "${WITH_MCP:-0}" "${MCP_SERVER_NAME:-BlogSEO}" "$ROOT/mcp.json" <<'PY'
 import json
 import os
 import sys
 
-source, target, name, stage = sys.argv[1:5]
+source, stage, name, with_mcp, server_name, mcp_source = sys.argv[1:7]
 with open(source) as manifest_file:
-    manifest = json.load(manifest_file)
-manifest["name"] = name
-interface = manifest["extensions"]["com.openai"]["interface"]
+    portable = json.load(manifest_file)
+interface = portable["extensions"]["com.openai"]["interface"]
 problems = []
 for field, limit in (("displayName", 30), ("shortDescription", 30), ("longDescription", 4000), ("developerName", 80)):
     if not 0 < len(interface.get(field, "")) <= limit:
@@ -44,8 +44,24 @@ for field in ("logo", "composerIcon"):
         problems.append(f"{field} points at a file that is not in the package: {interface.get(field)}")
 if problems:
     sys.exit("Listing metadata is not ready for the OpenAI portal:\n- " + "\n- ".join(problems))
-with open(target, "w") as manifest_file:
-    json.dump(manifest, manifest_file, indent=4, ensure_ascii=False)
+manifest = {
+    "author": {"name": interface["developerName"]},
+    "description": interface["longDescription"],
+    "interface": interface,
+    "name": name,
+    "skills": "./skills",
+    "version": portable["version"],
+}
+if with_mcp == "1":
+    with open(mcp_source) as mcp_file:
+        servers = json.load(mcp_file)["mcpServers"]
+    url = next(iter(servers.values()))["url"]
+    manifest["mcpServers"] = "./.mcp.json"
+    with open(os.path.join(stage, ".mcp.json"), "w") as mcp_file:
+        json.dump({"mcpServers": {server_name: {"url": url}}}, mcp_file, indent=2)
+        mcp_file.write("\n")
+with open(os.path.join(stage, ".codex-plugin", "plugin.json"), "w") as manifest_file:
+    json.dump(manifest, manifest_file, indent=2, ensure_ascii=False, sort_keys=True)
     manifest_file.write("\n")
 PY
 mkdir -p "$(dirname "$OUTPUT")"
