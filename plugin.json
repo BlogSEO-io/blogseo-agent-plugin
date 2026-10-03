@@ -1,21 +1,35 @@
 {
     "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
     "name": "blogseo",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "SEO that executes from your AI assistant: research keywords, plan the calendar, write, score and publish articles to your CMS, and build backlinks with the BlogSEO MCP server.",
-    "author": { "name": "BlogSEO", "email": "support@blogseo.io", "url": "https://www.blogseo.io" },
+    "author": {
+        "name": "BlogSEO",
+        "email": "support@blogseo.io",
+        "url": "https://www.blogseo.io"
+    },
     "homepage": "https://www.blogseo.io/seo-mcp",
     "repository": "https://github.com/BlogSEO-io/blogseo-agent-plugin",
     "license": "MIT",
-    "keywords": ["seo", "content", "blog", "keywords", "backlinks", "wordpress", "shopify", "webflow", "mcp"],
+    "keywords": [
+        "seo",
+        "content",
+        "blog",
+        "keywords",
+        "backlinks",
+        "wordpress",
+        "shopify",
+        "webflow",
+        "mcp"
+    ],
     "extensions": {
         "com.openai": {
             "interface": {
                 "displayName": "BlogSEO",
-                "shortDescription": "Write and publish SEO articles",
-                "longDescription": "BlogSEO turns ChatGPT into an SEO assistant that does the work in your BlogSEO account, not just the analysis.\n\nAsk it to find the keywords your site can rank for, and it researches them with search volume, difficulty and intent, then adds the best ones to your plan. Ask it to fill next month's content calendar, and it schedules articles on the dates you choose with a keyword, headline and brief. BlogSEO writes each article with internal links and images, scores it against the pages that already rank for its keyword, and publishes it to your CMS: WordPress, Shopify, Webflow, Ghost, HubSpot, Wix, Framer and 23+ other platforms, or a custom-built site through a webhook.\n\nOnce articles are live, ask which pages lost clicks this month, which keywords sit on page 2, or where two of your pages compete for the same keyword, and get answers from your Search Console data with a fix for each. Rewrite an article from chat, replace its cover image, fix its meta description or alt text, and push the update to your site.\n\nBacklinks are covered too: see the links placed to your site through the BlogSEO exchange, check any domain's Domain Rating, and review any backlink profile.\n\nAgencies and freelancers connect once and reach every website they manage, each with its own CMS, keywords and calendar.\n\nRequires a BlogSEO account with at least one website. You sign in with your BlogSEO login and choose which websites ChatGPT may use. Reading your data is free; keyword research, competitor benchmarks and AI rewrites use the AI brain credits included in your plan, and the assistant tells you the cost before spending any.",
+                "shortDescription": "SEO articles and backlinks",
+                "longDescription": "BlogSEO is an SEO tool for website owners, marketers and agencies. It does two jobs for a website: it writes and publishes search-optimized blog articles, and it builds backlinks to the site. This plugin lets ChatGPT run both in your BlogSEO account, not just advise on them.\n\nContent. Ask it to find the keywords your site can rank for, and it researches them with search volume, difficulty and intent, then adds the best ones to your keyword list. Ask it to fill next month's content calendar, and it schedules articles on the dates you choose with a keyword, headline and brief. BlogSEO writes each article with internal links and images, scores it against the pages that already rank for its keyword, and publishes it to your CMS: WordPress, Shopify, Webflow, Ghost, HubSpot, Wix, Framer and 23+ other platforms, or a custom-built site through a webhook.\n\nBacklinks. BlogSEO's backlink exchange places links to your site in relevant articles on other member websites. Ask which backlinks your site has received and from which domains, check the Domain Rating of any website, and review the backlink profile of your site or of a competitor.\n\nRankings. Once articles are live, ask which pages lost clicks this month, which keywords sit on page 2, or where two of your pages compete for the same keyword, and get answers from your Search Console data with a fix for each. Rewrite an article from chat, replace its cover image, fix its meta description or alt text, and push the update to your site.\n\nAgencies and freelancers connect once and reach every website they manage, each with its own CMS, keywords and calendar.\n\nRequires a BlogSEO account with at least one website. You sign in with your BlogSEO login and choose which websites ChatGPT may use.",
                 "developerName": "BlogSEO",
-                "category": "Productivity",
+                "category": "Business & Operations",
                 "capabilities": [],
                 "websiteURL": "https://www.blogseo.io/seo-mcp",
                 "supportURL": "https://www.blogseo.io/contact",
@@ -23,8 +37,8 @@
                 "termsOfServiceURL": "https://www.blogseo.io/tos",
                 "defaultPrompt": [
                     "Show my keywords ranking between position 5 and 15 with the most impressions, and what to change on each page.",
-                    "Compare my search clicks over the last 28 days with the 28 days before. Which pages lost traffic and why?",
-                    "Fill next month's empty calendar slots with articles on my best keywords that have no article yet."
+                    "Fill next month's empty calendar slots with articles on my best keywords that have no article yet.",
+                    "Which backlinks did my site receive this month, and what is the Domain Rating of each linking site?"
                 ],
                 "brandColor": "#1890FF",
                 "composerIcon": "./assets/icon.png",

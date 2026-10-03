@@ -1,6 +1,6 @@
 {
     "name": "blogseo",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "SEO that executes from Cursor: research keywords, plan the calendar, write, score and publish articles to your CMS, and build backlinks with the BlogSEO MCP server.",
     "author": { "name": "BlogSEO", "url": "https://www.blogseo.io" },
     "homepage": "https://www.blogseo.io/seo-mcp",
