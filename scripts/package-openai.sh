@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Builds the ZIP for the OpenAI plugin portal ("Upload new version").
 # The portal identifies a plugin by the package name it assigned (app-...) and rejects any other manifest name,
-# so the name is swapped in the packaged copy only. Every upload replaces the whole package: the listing is read
-# from extensions.com.openai.interface in plugin.json, and a component left out of the ZIP is dropped.
+# so the name is swapped in the packaged copy only. Every upload rebuilds the listing from
+# extensions.com.openai.interface in plugin.json. mcp.json stays out by default: while the plugin's MCP app is
+# unpublished the portal refuses a package that declares the server again ("Keep the existing MCP connection").
+# Set WITH_MCP=1 to include it.
 set -euo pipefail
 
 PACKAGE_NAME="${1:?usage: scripts/package-openai.sh <openai-package-name> [output.zip]}"
@@ -12,7 +14,8 @@ OUTPUT="${2:-$ROOT/dist/blogseo-openai-$VERSION.zip}"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
-cp -R "$ROOT/skills" "$ROOT/assets" "$ROOT/mcp.json" "$ROOT/LICENSE" "$STAGE/"
+cp -R "$ROOT/skills" "$ROOT/assets" "$ROOT/LICENSE" "$STAGE/"
+if [ "${WITH_MCP:-0}" = "1" ]; then cp "$ROOT/mcp.json" "$STAGE/"; fi
 python3 - "$ROOT/plugin.json" "$STAGE/plugin.json" "$PACKAGE_NAME" "$STAGE" <<'PY'
 import json
 import os
@@ -47,5 +50,5 @@ with open(target, "w") as manifest_file:
 PY
 mkdir -p "$(dirname "$OUTPUT")"
 rm -f "$OUTPUT"
-(cd "$STAGE" && zip -q -r "$OUTPUT" plugin.json mcp.json LICENSE assets skills -x '*.DS_Store')
+(cd "$STAGE" && zip -q -r "$OUTPUT" . -x '*.DS_Store')
 echo "$OUTPUT"
