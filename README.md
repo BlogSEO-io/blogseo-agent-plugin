@@ -82,7 +82,8 @@ With several websites on the account, name the website in the prompt or let the 
 | `skills/blogseo-plug-website` | Connecting a custom-built site: hosted blog or custom webhook |
 | `skills/blogseo-article-images` | Replacing images from local files or URLs, alt text |
 | `.cursor-plugin/`, `.claude-plugin/`, `.mcp.json` | Client-specific manifests for Cursor and Claude Code |
-| `scripts/package-openai.sh` | Builds the ZIP for the OpenAI plugin portal |
+| `assets/logo.png` | Listing icon |
+| `scripts/package-openai.sh` | Builds the ZIP for the OpenAI plugin portal, whose listing is read from `extensions.com.openai` in `plugin.json` |
 
 ## Links
 
