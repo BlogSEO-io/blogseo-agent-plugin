@@ -9,7 +9,7 @@ Sites built by hand (Next.js, Astro, Rails, anything without a supported CMS) ha
 
 ## Steps
 
-1. `get_account`, then `get_website_setup_guide` for the website. The guide is the source of truth for both options and their current limits; follow it rather than this file when they disagree.
+1. `get_account` to find the website, then `list_integrations` to see what is already connected: reuse an existing webhook or hosted blog instead of creating another. The descriptions of the tools below are the source of truth for both options and their current limits; follow them rather than this file when they disagree.
 2. **Hosted blog on a subdomain** (no code): `create_hosted_blog` returns the DNS records to add. Tell the user exactly which records, then poll `get_hosted_blog_status` until it reports live. Note that the hosted blog is a CMS integration, so it cannot coexist with WordPress, Shopify or another CMS on the same website.
 3. **Custom webhook into the codebase**: `get_webhook_contract` returns the payload BlogSEO sends and the signature scheme. Write the receiving endpoint in the user's stack, persist the article, then `connect_custom_webhook`. The shared secret is returned once: put it in the deployment's environment variables, never in the repo. Finish with `test_custom_webhook` and show the user the test payload landing.
 4. Both paths end with auto-publish on. Confirm with `list_integrations` and tell the user the next generated article will be published automatically.
