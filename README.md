@@ -10,7 +10,7 @@ This repository also packages the server as an [Agent Plugin](https://agent-plug
 
 ## What the server does
 
-60 tools, grouped by job:
+52 tools, grouped by job:
 
 | Area | What the assistant can do |
 | --- | --- |
@@ -19,7 +19,7 @@ This repository also packages the server as an [Agent Plugin](https://agent-plug
 | Articles | List and read articles, update the headline, slug, meta description, cover image and alt text, edit content with AI, publish or sync to the connected CMS |
 | SEO checks | On-page SEO score for an article or pasted content, competitor benchmark, AI improvements, keyword density of any page |
 | Backlinks | Links placed through the BlogSEO exchange, Domain Rating and backlink profile of any domain |
-| Integrations | List connections, connect and test a custom webhook, set up a hosted blog, read the setup guides |
+| Integrations | List connections, connect and test a custom webhook, set up a hosted blog, read the webhook contract |
 | Account | Websites the connection may use, credit balances, plan and website settings |
 
 Reading data is free. Tools that spend credits (keyword research, AI edits, competitor benchmarks) answer with the cost first and only run after an explicit confirmation. Destructive tools are annotated, so the client asks before running them. Tokens, payment data and integration credentials are never returned.

@@ -27,7 +27,7 @@ Pass `image_url` directly to the same tools, 4 MB max.
 
 ## Alt text
 
-- Cover: `update_article_cover_alt_text`, or `alt_text` on `set_article_cover_image`. Stored once per article and shared by every language.
-- Inline images: the alt lives in the markdown as `![alt](url)`; edit the body with `update_article_content`.
+- Cover: `cover_alt_text` on `update_article`, or `alt_text` on `set_article_cover_image`. Stored once per article and shared by every language.
+- Inline images: the alt lives in the markdown as `![alt](url)`; edit the body with `update_article` (`markdown_content`).
 
 Replacing images on a published article marks it Out of Sync: offer `sync_article_to_cms`.

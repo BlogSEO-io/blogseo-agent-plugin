@@ -5,7 +5,7 @@ description: Run SEO work end to end with the BlogSEO MCP server (keywords, cont
 
 # BlogSEO SEO workflows
 
-BlogSEO exposes 60 tools over MCP. You never have to name a tool to the user: pick them from what they ask.
+BlogSEO exposes 52 tools over MCP. You never have to name a tool to the user: pick them from what they ask.
 
 ## Ground rules
 
@@ -17,15 +17,15 @@ BlogSEO exposes 60 tools over MCP. You never have to name a tool to the user: pi
 
 ## Playbooks
 
-**Page-2 keywords to page 1.** `get_keyword_rankings` filtered to positions 5 to 15 and at least 200 impressions, sorted by impressions. For each keyword report the ranking page, its CTR, and one on-page change. Apply the change with `update_article_content` only when the user agrees.
+**Page-2 keywords to page 1.** `get_keyword_rankings` filtered to positions 5 to 15 and at least 200 impressions, sorted by impressions. For each keyword report the ranking page, its CTR, and one on-page change. Apply the change with `update_article` only when the user agrees.
 
 **Catch traffic loss.** `get_keyword_trends` comparing the last 28 days to the 28 before, rolled up by page. For the biggest losers, read the article with `get_article`, state the likely cause, propose one fix.
 
 **Stop pages from competing.** `find_keyword_cannibalization`. For each pair, recommend consolidate or differentiate and which URL should win.
 
-**Plan the calendar.** `list_scheduled_articles` for free slots, then `schedule_article` with the date, keyword, headline and brief. If the day is full for the site's publishing frequency, the tool answers with the next free date: ask before using it. `schedule_articles_for_keywords` fills several slots from the highest-opportunity keywords.
+**Plan the calendar.** `list_scheduled_articles` for free slots, then `schedule_article` with the date, keyword, headline and brief. If the day is full for the site's publishing frequency, the tool answers with the next free date: ask before using it. `schedule_article` with only `keyword_ids` fills several slots from the highest-opportunity keywords, writing the headlines and picking the dates.
 
-**Fix an underperforming article.** `check_article_seo_score` for the free score, `run_advanced_seo_check` to benchmark against the pages that rank for its keyword, then `improve_article_seo` (1 credit) to apply the recommendations, or edit the markdown yourself with `update_article_content`.
+**Fix an underperforming article.** `check_article_seo_score` for the free score, `run_advanced_seo_check` to benchmark against the pages that rank for its keyword, then `improve_article_seo` (1 credit) to apply the recommendations, or edit the markdown yourself with `update_article`.
 
 **Backlinks.** `get_backlinks_overview` for what the exchange placed and verified, `check_backlinks` (1 credit) for any domain's profile, `check_domain_rating` free for any domain.
 
